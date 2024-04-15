@@ -1,0 +1,32 @@
+package main
+
+templ root() {
+	<html>
+		<head>
+			<meta charset="UTF-8"/>
+			<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+			<title>Da Wall</title>
+			<link rel="stylesheet" href="/public/css/style.css"/>
+			<script src="/public/js/htmx.min.js"></script>
+		</head>
+		<body>
+			<header>
+				<h1>Wall of posts</h1>
+			</header>
+			<main hx-target="#posts-container" hx-swap="innerHtml transition:true">
+				<section>
+					<form hx-post="/posts" hx-on::after-request="this.reset()">
+						<textarea placeholder="lorem ipsum..." class="form-textarea" name="post_text" minlength="1"></textarea>
+						<button class="form-button" type="submit">Create post</button>
+					</form>
+				</section>
+				<hr/>
+				<section hx-get="/posts" hx-trigger="load, every 5s">
+					<h3>Previous posts</h3>
+					<h3 class="htmx-indicator">Loading...</h3>
+					<div id="posts-container"></div>
+				</section>
+			</main>
+		</body>
+	</html>
+}

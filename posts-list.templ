@@ -1,0 +1,16 @@
+package main
+
+templ posts_list(posts []Post) {
+	for _, post := range posts {
+		<div class="post-item">
+			<div class="post-item-info">
+				<span class="post-item__date">
+					{ post.create_date.Format("2006/01/02 15:04:05") }
+				</span>
+			</div>
+			<p class="post-item__text">
+				{ post.text }
+			</p>
+		</div>
+	}
+}
